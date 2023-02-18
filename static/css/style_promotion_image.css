@@ -1,0 +1,33 @@
+h1 {
+color: #ff0000;
+}
+
+.idk {
+    margin-top: 5px;
+    padding-top: 1rem;
+}
+
+#id1 {
+    background: #d6d8d9;
+    color: #1b1e21;
+}
+
+#id2 {
+    background: #d4edda;
+    color: #155724;
+}
+
+#id3 {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+#id4 {
+    background: #fff3cd;
+    color: #856404;
+}
+
+#id5 {
+    background: #f8d7da;
+    color: #721c24;
+}

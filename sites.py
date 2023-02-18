@@ -38,8 +38,44 @@ def image_mars():
     </head>
     <body>
         <h1>Жди нас, Марс!</h1>
-        <img src='{url_for('static', filename='mars.png')}' alt="я не знаю почему оно не выводится, и я устал">
+        <img src='{url_for('static', filename='img/mars.png')}' alt="я не знаю почему оно не выводится, и я устал">
         <p>Вот она какая, Земля через сто лет.</p>
+    </body>
+    '''
+
+
+@app.route('/promotion_image')
+def promotion_image():
+    return f'''
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Колонизация</title>
+        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="static/css/style_promotion_image.css">
+    </head>
+    <body>
+        <h1>Жди нас, Марс!</h1>
+        <img src='{url_for('static', filename='img/mars.png')}' alt="я не знаю почему оно не выводится, и я устал">
+        <div class="idk" id="id1">
+            <strong>Человечество вырастает из детства.</strong>
+        </div>
+        <div class="idk" id="id2">
+            <strong>Человечеству мала одна планета.</strong>
+        </div>
+        <div class="idk" id="id3">
+            <strong>Мы сделаем обитаемыми безжизненные пока планеты.</strong>
+        </div>
+        <div class="idk" id="id4">
+            <strong>И начнём с Марса!</strong>
+        </div>
+        <div class="idk" id="id5">
+            <strong>Присоединяйся!</strong>
+        </div>
     </body>
     '''
 
