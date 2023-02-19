@@ -5,220 +5,107 @@ app = Flask(__name__)
 
 @app.route('/')
 def DaDaDa():
-    return '''<p><strong>Миссия Колонизация Марса</strong></p>'''
+    with open('html/first_page.html', 'r', encoding='utf-8') as f:
+        return f.read()
 
 
 @app.route('/index')
 def index():
-    return '''<p><strong>И на Марсе будут яблони цвести!</strong></p>'''
+    with open('html/index.html', 'r', encoding='utf-8') as f:
+        return f.read()
 
 
 @app.route('/promotion')
 def promotion():
-    return '''
-    <p><strong>Человечество вырастает из детства.</strong></p>
-    <p><strong>Человечеству мала одна планета.</strong></p>
-    <p><strong>Мы сделаем обитаемыми безжизненные пока планеты.</strong></p>
-    <p><strong>И начнем с Марса!</strong></p>
-    <p><strong>Присоединяйся!</strong></p>
-    '''
+    with open('html/promotion.html', 'r', encoding='utf-8') as f:
+        return f.read()
 
 
 @app.route('/image_mars')
 def image_mars():
-    return f'''
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Привет, Марс!</title>
-        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css ">
-    </head>
-    <body>
-        <h1>Жди нас, Марс!</h1>
-        <img src='{url_for('static', filename='img/mars.png')}' alt="я не знаю почему оно не выводится, и я устал">
-        <p>Вот она какая, Земля через сто лет.</p>
-    </body>
-    '''
+    with open('html/image_mars.html', 'r', encoding='utf-8') as f:
+        return f.read().replace('{{ mars_image }}', url_for('static', filename='img/mars.png'))
 
 
 @app.route('/promotion_image')
 def promotion_image():
-    return f'''
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Колонизация</title>
-        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-        <link rel="stylesheet" href="static/css/style_promotion_image.css">
-    </head>
-    <body>
-        <h1>Жди нас, Марс!</h1>
-        <img src='{url_for('static', filename='img/mars.png')}' alt="я не знаю почему оно не выводится, и я устал">
-        <div class="idk" id="id1">
-            <strong>Человечество вырастает из детства.</strong>
-        </div>
-        <div class="idk" id="id2">
-            <strong>Человечеству мала одна планета.</strong>
-        </div>
-        <div class="idk" id="id3">
-            <strong>Мы сделаем обитаемыми безжизненные пока планеты.</strong>
-        </div>
-        <div class="idk" id="id4">
-            <strong>И начнём с Марса!</strong>
-        </div>
-        <div class="idk" id="id5">
-            <strong>Присоединяйся!</strong>
-        </div>
-    </body>
-    '''
+    with open('html/promotion_image.html', 'r', encoding='utf-8') as f:
+        return f.read().replace('{{ mars_image }}', url_for('static', filename='img/mars.png'))
 
 
 @app.route('/form_sample', methods=['POST', 'GET'])
 def form_sample():
     if request.method == 'GET':
-        return f'''<!doctype html>
-                        <html lang="en">
-                          <head>
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                            <link rel="stylesheet"
-                            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-                            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-                            crossorigin="anonymous">
-                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/form.css')}" />
-                            <title>Отбор астронавтов</title>
-                          </head>
-                          <body>
-                            <h1>Форма для регистрации в суперсекретной системе</h1>
-                            <div>
-                                <form class="login_form" method="post">
-                                    <input type="last_name" class="form-control" id="last_name" aria-describedby="last_nameHelp" placeholder="Введите фамилию" name="last_name">
-                                    <input type="first_name" class="form-control" id="first_name" placeholder="Введите имя" name="first_name">
-                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите адрес почты" name="email">
-                                    <div class="form-group">
-                                        <label for="classSelect">Какое у Вас образование?</label>
-                                        <select class="form-control" id="classSelect" name="class">
-                                          <option>Начальное</option>
-                                          <option>Среднее общее</option>
-                                          <option>Среднее специальное</option>
-                                          <option>Высшее</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="classSelect">Какие у вас есть профессии?</label>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Инженер-исследователь</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Пилот</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Строитель</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Экзобиолог</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Врач</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Инженер по терраформированию</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Климатолог</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Специалист по радиационной защите</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Астрогеолог</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Гляциолог</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Инженер жизнеобеспечения</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Метеоролог</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Оператор марсохода</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Киберинженер</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Штурман</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="accept">
-                                            <label class="form-check-label" for="acceptRules">Пилот дронов</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="form-check">Укажите пол</label>
-                                        <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="sex" id="male" value="male" checked>
-                                          <label class="form-check-label" for="male">
-                                            Мужской
-                                         </label>
-                                       </div>
-                                       <div class="form-check">
-                                         <input class="form-check-input" type="radio" name="sex" id="female" value="female">
-                                         <label class="form-check-label" for="female">
-                                           Женский
-                                         </label>
-                                       </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="about">Почему Вы хотите принять участие в миссии?</label>
-                                        <textarea class="form-control" id="about" rows="3" name="about"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="photo">Приложите фотографию</label>
-                                        <input type="file" class="form-control-file" id="photo" name="file">
-                                    </div>
-                                    <div class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input" id="acceptRules" name="accept">
-                                        <label class="form-check-label" for="acceptRules">Готов остаться на Марсе</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Отправить</button>
-                                </form>
-                            </div>
-                          </body>
-                        </html>'''
+        with open('html/form_sample.html', 'r', encoding='utf-8') as f:
+            return f.read().replace('{{ form.css }}', url_for('static', filename='css/form.css'))
     elif request.method == 'POST':
-        print(request.form['email'])
-        print(request.form['password'])
-        print(request.form['class'])
-        print(request.form['file'])
-        print(request.form['about'])
-        print(request.form['accept'])
-        print(request.form['sex'])
+        print(request.form)
         return "Форма отправлена"
+
+
+@app.route('/choice/<planets_name>')
+def greeting(planets_name):
+    planets_name = planets_name.lower()
+    text = [planets_name.capitalize(), ]
+    if planets_name == 'меркурий':
+        text.append('Самая маленькая и самая близкая к Солнцу планета;')
+        text.append('Первые люди наблюдали Меркурий невооруженным взглядом примерно 5 тысяч лет назад;')
+        text.append('Запущенный в 2004 году зонд «Мессенджер» до сих пор работает на меркурианской орбите;')
+        text.append('У Меркурия есть магнитное поле, правда, очень слабое — примерно в сто раз слабее земного;')
+        text.append('За меркурианский год планета поворачивается вокруг своей оси на полтора оборота. То есть в течение 2 лет на планете проходит всего лишь трое суток.')
+    elif planets_name == 'венера':
+        text.append('Вторая по счёту планета;')
+        text.append('Самая горячая планета Солнечной системы;')
+        text.append('Венеру можно легко увидеть с Земли невооружённым взглядом;')
+        text.append('У Венеры и Земли похожие размеры и масса;')
+        text.append('Венера имеет очень плотную атмосферу, ее масса в 93 раза больше земного воздуха.')
+    elif planets_name == 'марс':
+        text.append('Эта планета близкая к Земле;')
+        text.append('На ней много необходимых ресурсов;')
+        text.append('На ней есть вода и атмосфера;')
+        text.append('На ней есть небольшое магнитное поле;')
+        text.append('Наконец, она просто красивая!')
+    elif planets_name == 'юпитер':
+        text.append('Самая большая планета солнечной системы;')
+        text.append('Еcли бы Юпитepу удaлocь зaxвaтить в 80 paз бoльшe мaccы, чeм eгo нынeшняя мacca, oн фaктичecки oкaзaлcя бы звeздoй, a нe плaнeтoй;')
+        text.append('Aтмocфepa Юпитepa oчeнь пoxoжa нa aтмocфepу нaшeгo Coлнцa;')
+        text.append('Oн coвepшaeт oдин oбopoт вoкpуг cвoeй ocи вceгo зa 10 чacoв;')
+        text.append('Maгнитнoe пoлe Юпитepa в 20 000 paз cильнee мaгнитнoгo пoля Зeмли.')
+    elif planets_name == 'сатурн':
+        text.append('ЛЮДИ УЗНАЮТ,')
+        text.append('ЧТО СО СМЕРТЬЮ ИХ МИРСКОГО ДУХА')
+        text.append('ОНИ ВОЗРОДЯТСЯ В ЕДИНСТВО')
+        text.append('КАК БОЛЕЕ СИЛЬНОЕ')
+        text.append('БЕСКОНЕЧНОЕ ОБЩЕСТВО.')
+    elif planets_name == 'уран':
+        text.append('Седьмая по счёту планета;')
+        text.append('Этa плaнeтa имeeт нeoбычный cинe-зeлeный цвeт, peзультaтoм кoтopoгo являeтcя пpиcутcтвиe в избыткe мeтaнa в вoдopoднo-гeлиeвoй aтмocфepe плaнeты;')
+        text.append('Чтo кacaeтcя мaccы плaнeты, тo 25% зaнимaют кaмни, 5-15% - гeлий и вoдopoд, a 60-70% - лeд;')
+        text.append('Уpaн дocтaтoчнo яpкий, чтoбы быть увидeнным чeлoвeкoм;')
+        text.append('Этa плaнeтa нa caмoм дeлe являeтcя caмoй xoлoднoй плaнeтoй в Coлнeчнoй cиcтeмe.')
+    elif planets_name == 'нептун':
+        text.append('Самая дальняя от солнца планета;')
+        text.append('На планете дуют самые сильные в Солнечной системе ветра;')
+        text.append('Излучает в 2,6 раза больше тепла, чем получает от Солнца;')
+        text.append('Я незнаю что писать;')
+        text.append('Да и так уже много чего написал.')
+    elif planets_name == 'земля':
+        text.append('Ахахаха!')
+        text.append('Я пошутил!')
+        text.append('Вы и так уже здесь.')
+        text.append('Бадумс...')
+        text.append('Ладно...')
+    else:
+        text.append('Такого')
+        text.append('я')
+        text.append('не')
+        text.append('ожидал.')
+        text.append('GGWPGLHF')
+    with open('html/choice.html', 'r', encoding='utf-8') as f:
+        f = f.read().replace('{{ choice.css }}', url_for('static', filename='css/choice.css'))
+        for i in range(len(text)):
+            f = f.replace('{{ text' + str(i) + ' }}', text[i])
+        return f
 
 
 if __name__ == '__main__':
