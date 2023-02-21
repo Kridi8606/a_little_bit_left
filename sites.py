@@ -108,5 +108,16 @@ def greeting(planets_name):
         return f
 
 
+@app.route('/results/<nickname>/<int:level>/<float:rating>')
+def results(nickname, level, rating):
+    with open('html/results.html', 'r', encoding='utf-8') as f:
+        html = f.read()
+    html = html.replace('{{ results.css }}', url_for('static', filename='css/results.css'))
+    html = html.replace('{{ nickname }}', nickname)
+    html = html.replace('{{ num }}', str(level))
+    html = html.replace('{{ score }}', str(rating))
+    return html
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
